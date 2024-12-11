@@ -1,0 +1,94 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+header {
+    background-color: #6200ea;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Controls container */
+.controls-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 30px;
+    gap: 10px;
+}
+
+/* Center calendar container */
+.calendar-container {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    flex-wrap: wrap;
+    gap: 20px; /* Increased gap between months */
+}
+
+/* Month container styling */
+.month {
+    flex: 0 1 320px; /* Larger width for the month container */
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.97);
+    margin: 0;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    overflow: hidden;
+}
+
+.month h3 {
+    background-color: #4CAF50;
+    color: white;
+    margin: 0;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px; /* Slightly larger font size */
+    font-weight: 600;
+    border-bottom: 1px solid #ddd; /* Add border to separate month name from days */
+}
+
+/* Calendar grid layout */
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px; /* Smaller gap between days */
+    padding: 10px;
+    background-color: #ddd;
+}
+
+.day {
+    background-color: #fff;
+    text-align: center;
+    padding: 10px 5px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    border-radius: 5px; /* Rounded corners for each day */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.day.blank {
+    background-color: transparent;
+    border: none;
+}
+
+.day:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+.day.selected {
+    background-color: #6200ea;
+    color: white;
+}
+
+.day.active {
+    background-color: #4CAF50;
+    color: white;
+}
