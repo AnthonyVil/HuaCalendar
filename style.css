@@ -33,13 +33,13 @@ header {
 
 /* Month container styling */
 .month {
-    flex: 0 1 320px; /* Larger width for the month container */
+    flex: 3 1 442px;
     border: 1px solid #ddd;
-    background-color: rgba(255, 255, 255, 0.97);
+    background-color: rgb(177 33 33 / 37%);
     margin: 0;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: auto;
 }
 
 .month h3 {
@@ -64,13 +64,14 @@ header {
 
 .day {
     background-color: #fff;
-    text-align: center;
-    padding: 10px 5px;
-    font-size: 14px;
+    text-align: left; /* Aligns text to the left */
+    padding: 15px 10px 50px 10px; /* Increased padding to provide more space */
+    font-size: 24px;
     cursor: pointer;
     border: 1px solid #ddd;
     border-radius: 5px; /* Rounded corners for each day */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    min-height: 80px; /* Ensures enough space for text and events */
 }
 
 .day.blank {
@@ -92,6 +93,21 @@ header {
     background-color: #4CAF50;
     color: white;
 }
+
+/* Event indicator for a created event (purple dot) */
+.event-indicator {
+    position: absolute;
+    bottom: 5px; /* Place it slightly above the bottom to avoid clipping */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px; /* Increase size of the dot */
+    height: 14px; /* Increase size of the dot */
+    background-color: #6200ea; /* Purple dot */
+    border-radius: 50%;
+    z-index: 100; /* Ensure the dot appears on top of the day cell */
+}
+
+
 
 /* Pop-up Styling */
 .popup {
