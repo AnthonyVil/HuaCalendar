@@ -21,6 +21,29 @@
     <div id="calendar" class="calendar-container"></div>
 </main>
 
+<!-- Event Creation Pop-up -->
+<div id="eventPopup" class="popup">
+    <div class="popup-content">
+        <span id="closePopup" class="close">&times;</span>
+        <h2>Δημιουργία Εκδήλωσης</h2>
+        <p id="eventDateDisplay">Ημερομηνία: </p>
+        <form id="eventForm">
+            <label for="eventTitle">Τίτλος Εκδήλωσης</label>
+            <input type="text" id="eventTitle" placeholder="Εισάγετε τον τίτλο της εκδήλωσης" required />
+
+            <label for="eventDescription">Περιγραφή</label>
+            <textarea id="eventDescription" placeholder="Εισάγετε την περιγραφή της εκδήλωσης" required></textarea>
+
+            <label for="eventTime">Ώρα</label>
+            <input type="time" id="eventTime" required />
+
+            <input type="hidden" id="eventDate" />
+
+            <button type="submit">Αποθήκευση Εκδήλωσης</button>
+        </form>
+    </div>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>

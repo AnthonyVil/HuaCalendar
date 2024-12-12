@@ -89,13 +89,43 @@ document.addEventListener('DOMContentLoaded', () => {
         // Render days of the month
         const totalDays = new Date(year, month + 1, 0).getDate();
         for (let day = 1; day <= totalDays; day++) {
-            const dayDiv = document.createElement('div');
-            dayDiv.className = 'day';
-            dayDiv.textContent = day;
-            daysGrid.appendChild(dayDiv);
+            const dayElement = document.createElement('div');
+            dayElement.className = 'day';
+            dayElement.textContent = day;
+
+            // Add click listener to each day to open the event creation popup
+            dayElement.addEventListener('click', (e) => {
+                const selectedDay = e.target.textContent;
+                const selectedMonth = parseInt(monthSelect.value);
+                const selectedYear = parseInt(yearSelect.value);
+                const selectedDate = new Date(selectedYear, selectedMonth, selectedDay);
+
+                const formattedDate = `${selectedDay}-${selectedMonth + 1}-${selectedYear}`;
+
+                document.getElementById('eventDateDisplay').textContent = `Ημερομηνία: ${formattedDate}`;
+                document.getElementById('eventDate').value = formattedDate; // Pre-fill the hidden date field
+                document.getElementById('eventTime').value = "12:00"; // Default time (can be adjusted)
+
+                document.getElementById('eventPopup').style.display = 'flex'; // Show pop-up
+            });
+
+            daysGrid.appendChild(dayElement);
         }
 
         monthContainer.appendChild(daysGrid);
         calendarElement.appendChild(monthContainer);
     }
+
+    // Close pop-up when clicking the close button
+    document.getElementById('closePopup').addEventListener('click', () => {
+        document.getElementById('eventPopup').style.display = 'none';
+    });
+
+    // Prevent form submission for testing
+    document.getElementById('eventForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add event handling code here (saving the event, etc.)
+        alert('Event saved!');
+        document.getElementById('eventPopup').style.display = 'none';
+    });
 });
