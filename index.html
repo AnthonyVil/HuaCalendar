@@ -21,25 +21,34 @@
     <div id="calendar" class="calendar-container"></div>
 </main>
 
-<!-- Event Creation Pop-up -->
-<div id="eventPopup" class="popup">
+<!-- Day Popup -->
+<div id="dayPopup" class="popup">
     <div class="popup-content">
-        <span id="closePopup" class="close">&times;</span>
-        <h2>Δημιουργία Εκδήλωσης</h2>
-        <p id="eventDateDisplay">Ημερομηνία: </p>
+        <span id="closeDayPopup" class="close">&times;</span>
+        <h2>Επιλέξτε ώρα για την ημέρα</h2>
+        <select id="hourSelect"></select>
+        <div id="eventList">
+            <h3>Συμβάντα της Ημέρας</h3>
+            <ul id="eventListItems"></ul>
+        </div>
+        <button id="addEventButton">Προσθήκη Συμβάντος</button>
+    </div>
+</div>
+
+<!-- Add Event Popup -->
+<div id="addEventPopup" class="popup">
+    <div class="popup-content">
+        <span id="closeAddEventPopup" class="close">&times;</span>
+        <h2>Προσθήκη Συμβάντος</h2>
         <form id="eventForm">
-            <label for="eventTitle">Τίτλος Εκδήλωσης</label>
-            <input type="text" id="eventTitle" placeholder="Εισάγετε τον τίτλο της εκδήλωσης" required />
-
-            <label for="eventDescription">Περιγραφή</label>
-            <textarea id="eventDescription" placeholder="Εισάγετε την περιγραφή της εκδήλωσης" required></textarea>
-
-            <label for="eventTime">Ώρα</label>
-            <input type="time" id="eventTime" required />
-
-            <input type="hidden" id="eventDate" />
-
-            <button type="submit">Αποθήκευση Εκδήλωσης</button>
+            <label for="eventTitle">Τίτλος:</label>
+            <input type="text" id="eventTitle" required>
+            <label for="eventLocation">Τοποθεσία:</label>
+            <input type="text" id="eventLocation" required>
+            <label for="eventDescription">Περιγραφή:</label>
+            <textarea id="eventDescription" required></textarea>
+            <button type="submit">Αποθήκευση Συμβάντος</button>
+            <button type="button" id="deleteEventButton">Διαγραφή Συμβάντος</button>
         </form>
     </div>
 </div>

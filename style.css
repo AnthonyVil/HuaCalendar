@@ -22,20 +22,20 @@ header {
     gap: 10px;
 }
 
-/* Center calendar container */
-.calendar-container {
+/* Calendar container */
+#calendar {
     display: flex;
     justify-content: center;
     padding: 30px;
     flex-wrap: wrap;
-    gap: 20px; /* Increased gap between months */
+    gap: 20px;
 }
 
 /* Month container styling */
 .month {
     flex: 3 1 442px;
     border: 1px solid #ddd;
-    background-color: rgb(177 33 33 / 37%);
+    background-color: #fff;
     margin: 0;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -48,40 +48,34 @@ header {
     margin: 0;
     text-align: center;
     padding: 10px;
-    font-size: 20px; /* Slightly larger font size */
+    font-size: 20px;
     font-weight: 600;
-    border-bottom: 1px solid #ddd; /* Add border to separate month name from days */
+    border-bottom: 1px solid #ddd;
 }
 
 /* Calendar grid layout */
 .days-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 5px; /* Smaller gap between days */
+    gap: 5px;
     padding: 10px;
-    background-color: #ddd;
+    background-color: #f4f4f9;
 }
 
 .day {
     background-color: #fff;
-    text-align: left; /* Aligns text to the left */
-    padding: 15px 10px 50px 10px; /* Increased padding to provide more space */
-    font-size: 24px;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
     cursor: pointer;
     border: 1px solid #ddd;
-    border-radius: 5px; /* Rounded corners for each day */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-    min-height: 80px; /* Ensures enough space for text and events */
-}
-
-.day.blank {
-    background-color: transparent;
-    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .day:hover {
     background-color: #e0e0e0;
-    transform: scale(1.05); /* Slight scale effect on hover */
+    transform: scale(1.05);
 }
 
 .day.selected {
@@ -94,112 +88,135 @@ header {
     color: white;
 }
 
-/* Event indicator for a created event (purple dot) */
-.event-indicator {
-    position: absolute;
-    bottom: 5px; /* Place it slightly above the bottom to avoid clipping */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px; /* Increase size of the dot */
-    height: 14px; /* Increase size of the dot */
-    background-color: #6200ea; /* Purple dot */
-    border-radius: 50%;
-    z-index: 100; /* Ensure the dot appears on top of the day cell */
-}
-
-
-
-/* Pop-up Styling */
+/* Popup styles */
 .popup {
-    display: none; /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Ensures the pop-up is above other content */
-    animation: fadeIn 0.3s ease;
+    z-index: 1000;
 }
 
 .popup-content {
     background-color: white;
     padding: 30px;
-    border-radius: 10px;
-    width: 320px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    animation: slideUp 0.4s ease-in-out;
-    position: relative; /* Added to position the close button inside */
+    border-radius: 8px;
+    width: 400px;
+    max-height: 80%;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-button {
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 50%;
+    padding: 5px 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    background-color: #e63946;
 }
 
 .popup h2 {
-    text-align: center;
-    font-size: 22px;
-    color: #6200ea;
-    margin-bottom: 10px;
+    margin-top: 0;
 }
 
-.popup p {
-    text-align: center;
-    font-size: 17px;
-    color: #9f3788;
-    margin: 15px 0;
-}
-
-.popup input, .popup textarea, .popup button {
+label, input, select, textarea {
     width: 100%;
-    padding: 12px;
-    margin: 10px 0;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
 }
 
-.popup button {
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+button[type="submit"] {
     background-color: #6200ea;
     color: white;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
 }
 
-.popup button:hover {
+button[type="submit"]:hover {
     background-color: #4CAF50;
 }
 
-.popup .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 25px;
-    color: #6200ea;
+/* Event List Styling */
+#eventsList {
+    margin-top: 20px;
+}
+
+.event-item {
+    margin-bottom: 10px;
+}
+
+.event-item button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
     cursor: pointer;
-    transition: color 0.3s;
-    z-index: 1100; /* Ensure the close button is above the pop-up content */
 }
 
-.popup .close:hover {
-    color: #4CAF50;
+.event-item button:hover {
+    background-color: #e63946;
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Event List */
+#eventList {
+    margin-bottom: 10px;
 }
 
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-    }
-    to {
-        transform: translateY(0);
-    }
+#eventListItems {
+    list-style-type: none;
+    padding: 0;
 }
 
+#eventListItems li {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 5px solid #6200ea;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+#eventListItems li:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.02);
+}
+
+#eventListItems li .event-time {
+    font-size: 14px;
+    color: #666;
+}
+
+#eventListItems li .event-description {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #777;
+}
