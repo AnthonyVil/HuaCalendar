@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedDate = null;
     let selectedEvent = null;
 
-    // Populate year dropdown (current year to 2030)
-    for (let year = currentYear; year <= 2030; year++) {
+    // Populate year dropdown (current year to 2050)
+    for (let year = currentYear; year <= 2050; year++) {
         const option = document.createElement('option');
         option.value = year;
         option.textContent = year;
@@ -104,11 +104,14 @@ document.addEventListener('DOMContentLoaded', function () {
             dayElement.className = 'day';
             dayElement.textContent = day;
 
-            // Add event dot if the day has events
-            if (hasEvents(year, month, day)) {
-                const eventDot = document.createElement('div');
-                eventDot.className = 'event-dot';
-                dayElement.appendChild(eventDot);
+            // Add event dots if there are multiple events on the day
+            const eventsForDay = getEventsForDay(year, month, day);
+            if (eventsForDay.length > 0) {
+                eventsForDay.forEach(event => {
+                    const eventDot = document.createElement('div');
+                    eventDot.className = 'event-dot';
+                    dayElement.appendChild(eventDot);
+                });
             }
 
             // Add click listener to each day to open the day popup
@@ -123,12 +126,11 @@ document.addEventListener('DOMContentLoaded', function () {
         monthContainer.appendChild(daysGrid);
         calendarElement.appendChild(monthContainer);
     }
-
-    // Check if a day has events
-    function hasEvents(year, month, day) {
+    // Get events for a specific day
+    function getEventsForDay(year, month, day) {
         const events = JSON.parse(localStorage.getItem('events')) || [];
         const date = `${day}-${month + 1}-${year}`;
-        return events.some(event => event.date === date);
+        return events.filter(event => event.date === date);
     }
 
     // Open the day popup and populate it

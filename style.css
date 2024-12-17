@@ -66,17 +66,17 @@ header {
 
 /* Individual day styling */
 .day {
-    background-color: #ffffff; /* White background for each day */
+    background-color: #ffffff;
     text-align: center;
-    padding: 20px; /* Bigger padding for larger days */
-    font-size: 18px; /* Slightly larger font size */
-    font-weight: bold; /* Bold text for emphasis */
-    color: #333; /* Dark text for better readability */
+    padding: 26px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
     cursor: pointer;
     border: 1px solid #ddd;
-    border-radius: 12px; /* Rounder edges for each day */
+    border-radius: 12px;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for the day cells */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Hover effect on the day cells */
