@@ -147,8 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const eventsForDay = events.filter(event => event.date === date);
         eventListItems.innerHTML = eventsForDay.map((event, index) =>
             `<li>
-            ${event.title} (${event.time})
-            <button class="delete-event" data-index="${index}">🗑️</button>
+            ${event.title}
+            <button class="delete-event" data-index="${index}">Delete</button>
         </li>`
         ).join('');
 
