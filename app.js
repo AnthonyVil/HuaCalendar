@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
     const calendarElement = document.getElementById('calendar');
     const yearSelect = document.getElementById('yearSelect');
     const monthSelect = document.getElementById('monthSelect');
@@ -48,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCalendar(currentYear, currentMonth);
 
     // Event listeners for dropdowns
-    yearSelect.addEventListener('change', () => {
+    yearSelect.addEventListener('change', function () {
         const selectedYear = parseInt(yearSelect.value);
         const selectedMonth = parseInt(monthSelect.value);
         updateCalendar(selectedYear, selectedMonth);
     });
 
-    monthSelect.addEventListener('change', () => {
+    monthSelect.addEventListener('change', function () {
         const selectedYear = parseInt(yearSelect.value);
         const selectedMonth = parseInt(monthSelect.value);
         updateCalendar(selectedYear, selectedMonth);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCalendar(year, month) {
         const monthsToRender = [month, (month + 1) % 12, (month + 2) % 12]; // Current, next, and the month after next
 
-        monthsToRender.forEach((m) => {
+        monthsToRender.forEach(function (m) {
             const currentMonthYear = m < month ? year + 1 : year;
             renderMonth(currentMonthYear, m);
         });
@@ -104,8 +104,15 @@ document.addEventListener('DOMContentLoaded', () => {
             dayElement.className = 'day';
             dayElement.textContent = day;
 
+            // Add event dot if the day has events
+            if (hasEvents(year, month, day)) {
+                const eventDot = document.createElement('div');
+                eventDot.className = 'event-dot';
+                dayElement.appendChild(eventDot);
+            }
+
             // Add click listener to each day to open the day popup
-            dayElement.addEventListener('click', () => {
+            dayElement.addEventListener('click', function () {
                 selectedDate = `${day}-${month + 1}-${year}`;
                 openDayPopup(selectedDate);
             });
@@ -117,7 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
         calendarElement.appendChild(monthContainer);
     }
 
-// Open the day popup and populate it
+    // Check if a day has events
+    function hasEvents(year, month, day) {
+        const events = JSON.parse(localStorage.getItem('events')) || [];
+        const date = `${day}-${month + 1}-${year}`;
+        return events.some(event => event.date === date);
+    }
+
+    // Open the day popup and populate it
     function openDayPopup(date) {
         // Populate the hour dropdown
         hourSelect.innerHTML = '';
@@ -139,8 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
 
         // Add delete event functionality
-        document.querySelectorAll('.delete-event').forEach(button => {
-            button.addEventListener('click', (e) => {
+        document.querySelectorAll('.delete-event').forEach(function (button) {
+            button.addEventListener('click', function (e) {
                 const eventIndex = e.target.getAttribute('data-index');
                 const eventItemElement = e.target.closest('li'); // Get the li element containing the event
                 deleteEvent(eventIndex, eventItemElement); // Call the deleteEvent function with the element
@@ -151,8 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dayPopup.style.display = 'flex';
     }
 
-
-// Delete the event
+    // Delete the event
     function deleteEvent(eventIndex, eventItemElement) {
         // Get events from localStorage
         const events = JSON.parse(localStorage.getItem('events')) || [];
@@ -168,12 +181,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close the day popup
-    document.getElementById('closeDayPopup').addEventListener('click', () => {
+    document.getElementById('closeDayPopup').addEventListener('click', function () {
         dayPopup.style.display = 'none';
     });
 
     // Open the add event popup when "Add Event" button is clicked
-    document.getElementById('addEventButton').addEventListener('click', () => {
+    document.getElementById('addEventButton').addEventListener('click', function () {
         openAddEventPopup(selectedDate);
     });
 
@@ -188,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Close the add event popup
-    document.getElementById('closeAddEventPopup').addEventListener('click', () => {
+    document.getElementById('closeAddEventPopup').addEventListener('click', function () {
         addEventPopup.style.display = 'none';
     });
 
     // Handle form submission for adding/updating an event
-    eventForm.addEventListener('submit', (e) => {
+    eventForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         const newEvent = {
@@ -214,21 +227,4 @@ document.addEventListener('DOMContentLoaded', () => {
         // Refresh calendar after adding event
         updateCalendar(parseInt(yearSelect.value), parseInt(monthSelect.value));
     });
-
 });
-// Function to close the popup
-function closeDeleteEventPopupFunc() {
-    deleteEventPopup.style.display = "none";    // Hide the popup
-}
-
-// Event listeners for closing the popup
-closeDeleteEventPopup.addEventListener("click", closeDeleteEventPopupFunc);
-cancelDeleteButton.addEventListener("click", closeDeleteEventPopupFunc);
-
-// Event listener for confirming the deletion
-confirmDeleteButton.addEventListener("click", () => {
-    // Handle event deletion logic here
-    alert("Event deleted!"); // Placeholder for actual delete logic
-    closeDeleteEventPopupFunc();
-});
-
