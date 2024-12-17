@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         calendarElement.appendChild(monthContainer);
     }
 
-    // Open the day popup and populate it
+// Open the day popup and populate it
     function openDayPopup(date) {
         // Populate the hour dropdown
         hourSelect.innerHTML = '';
@@ -131,10 +131,40 @@ document.addEventListener('DOMContentLoaded', () => {
         // Display events for the day
         const events = JSON.parse(localStorage.getItem('events')) || [];
         const eventsForDay = events.filter(event => event.date === date);
-        eventListItems.innerHTML = eventsForDay.map(event => `<li>${event.title} (${event.time})</li>`).join('');
+        eventListItems.innerHTML = eventsForDay.map((event, index) =>
+            `<li>
+            ${event.title} (${event.time})
+            <button class="delete-event" data-index="${index}">🗑️</button>
+        </li>`
+        ).join('');
+
+        // Add delete event functionality
+        document.querySelectorAll('.delete-event').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const eventIndex = e.target.getAttribute('data-index');
+                const eventItemElement = e.target.closest('li'); // Get the li element containing the event
+                deleteEvent(eventIndex, eventItemElement); // Call the deleteEvent function with the element
+            });
+        });
 
         // Show the popup
         dayPopup.style.display = 'flex';
+    }
+
+
+// Delete the event
+    function deleteEvent(eventIndex, eventItemElement) {
+        // Get events from localStorage
+        const events = JSON.parse(localStorage.getItem('events')) || [];
+
+        // Remove the event from the array
+        events.splice(eventIndex, 1);
+
+        // Update the events in localStorage
+        localStorage.setItem('events', JSON.stringify(events));
+
+        // Remove the event from the DOM
+        eventItemElement.remove();
     }
 
     // Close the day popup
@@ -185,18 +215,20 @@ document.addEventListener('DOMContentLoaded', () => {
         updateCalendar(parseInt(yearSelect.value), parseInt(monthSelect.value));
     });
 
-    // Delete event (only if an event is selected)
-    deleteEventButton.addEventListener('click', () => {
-        if (selectedEvent) {
-            const events = JSON.parse(localStorage.getItem('events')) || [];
-            const updatedEvents = events.filter(event => event !== selectedEvent);
-            localStorage.setItem('events', JSON.stringify(updatedEvents));
-
-            alert('Event deleted!');
-            addEventPopup.style.display = 'none';
-
-            // Refresh calendar after deletion
-            updateCalendar(parseInt(yearSelect.value), parseInt(monthSelect.value));
-        }
-    });
 });
+// Function to close the popup
+function closeDeleteEventPopupFunc() {
+    deleteEventPopup.style.display = "none";    // Hide the popup
+}
+
+// Event listeners for closing the popup
+closeDeleteEventPopup.addEventListener("click", closeDeleteEventPopupFunc);
+cancelDeleteButton.addEventListener("click", closeDeleteEventPopupFunc);
+
+// Event listener for confirming the deletion
+confirmDeleteButton.addEventListener("click", () => {
+    // Handle event deletion logic here
+    alert("Event deleted!"); // Placeholder for actual delete logic
+    closeDeleteEventPopupFunc();
+});
+

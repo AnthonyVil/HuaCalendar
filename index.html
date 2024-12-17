@@ -24,7 +24,10 @@
 <!-- Day Popup -->
 <div id="dayPopup" class="popup">
     <div class="popup-content">
-        <span id="closeDayPopup" class="close">&times;</span>
+        <div id="popupContainer">
+            <button id="closeDayPopup">x</button>
+            <!-- other content of your popup -->
+        </div>
         <h2>Επιλέξτε ώρα για την ημέρα</h2>
         <select id="hourSelect"></select>
         <div id="eventList">
@@ -38,7 +41,10 @@
 <!-- Add Event Popup -->
 <div id="addEventPopup" class="popup">
     <div class="popup-content">
-        <span id="closeAddEventPopup" class="close">&times;</span>
+        <div id="closeAddEventPopupContainer">
+            <button id="closeAddEventPopup">x</button>
+            <!-- other content of your popup -->
+        </div>
         <h2>Προσθήκη Συμβάντος</h2>
         <form id="eventForm">
             <label for="eventTitle">Τίτλος:</label>
@@ -50,6 +56,17 @@
             <button type="submit">Αποθήκευση Συμβάντος</button>
             <button type="button" id="deleteEventButton">Διαγραφή Συμβάντος</button>
         </form>
+    </div>
+</div>
+
+<!-- Delete Event Confirmation Popup -->
+<div id="deleteEventPopup" class="popup">
+    <div class="popup-content">
+        <span id="closeDeleteEventPopup" class="close">&times;</span>
+        <h2>Είστε σίγουροι ότι θέλετε να διαγράψετε το συμβάν;</h2>
+        <p id="deleteEventTitle" style="color: red;"></p>
+        <button id="confirmDeleteButton">Διαγραφή</button>
+        <button id="cancelDeleteButton">Ακύρωση</button>
     </div>
 </div>
 

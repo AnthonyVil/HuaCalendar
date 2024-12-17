@@ -203,6 +203,9 @@ button[type="submit"]:hover {
     font-weight: 500;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #eventListItems li:hover {
@@ -219,4 +222,85 @@ button[type="submit"]:hover {
     margin-top: 5px;
     font-size: 14px;
     color: #777;
+}
+
+#eventListItems li button {
+    background-color: #ff4d4d;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#eventListItems li button:hover {
+    background-color: #e63946;
+}
+
+/* Ensure the container of the popup is a flex container */
+#popupContainer {
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+    align-items: center; /* Optionally vertically center the content */
+    padding: 10px; /* Padding around the popup container */
+    position: relative; /* Required for absolute positioning within the container */
+}
+
+/* Style for the closeDayPopup button */
+#closeDayPopup {
+    padding: 3px 8px;
+    margin: 4px 1px 5px 8px;
+    font-size: 16px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+#closeAddEventPopupContainer{
+    display: flex;
+    justify-content: flex-end; /* Align the content to the right */
+    align-items: center; /* Optionally vertically center the content */
+    padding: 10px; /* Padding around the popup container */
+    position: relative; /* Required for absolute positioning within the container */
+}
+
+#closeAddEventPopup{
+    padding: 3px 8px;
+    margin: 4px 1px 5px 8px;
+    font-size: 16px;
+    background-color: #e63946;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+
+#confirmDeleteButton {
+    background-color: red;
+    color: white;
+}
+
+#confirmDeleteButton:hover {
+    background-color: darkred;
+}
+
+#cancelDeleteButton {
+    background-color: gray;
+    color: white;
+}
+
+#cancelDeleteButton:hover {
+    background-color: darkgray;
+}
+
+/* Error message styling */
+#deleteEventTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 20px;
 }
